@@ -9,6 +9,9 @@ CREATE TABLE Movies(
 	Price decimal CHECK(Price BETWEEN 20 AND 150)
 )
 
+ALTER TABLE Movies
+ADD TypeMovie varchar(255) NOT NULL
+
 CREATE TABLE Places(
 	Id int primary key identity,
 	Name varchar(255) NOT NULL,
@@ -26,9 +29,8 @@ CREATE TABLE Users(
 
 CREATE VIEW AllData 
 AS
-Select U.FullName, U.Age, P.Name 'Sector', P.StartDate, P.EndDate, M.Name 'Movie', M.Price FROM Users U
+Select U.FullName, U.Age, P.Name 'Sector', P.StartDate, P.EndDate, M.Name 'Movie', M.TypeMovie 'Category', M.Price FROM Users U
 JOIN Places P
 ON U.PlaceId=P.Id
 JOIN Movies M
-ON P.MovieId=M.Id
-
+ON P.MovieId=M.Id 
